@@ -1,0 +1,34 @@
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+
+class AppointmentScheduler {
+    public LocalDateTime schedule(String appointmentDateDescription) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy HH:mm:ss");
+        return LocalDateTime.parse(appointmentDateDescription, formatter);
+
+    }
+
+    public boolean hasPassed(LocalDateTime appointmentDate) {
+        LocalDateTime.now();
+        return appointmentDate.isBefore(LocalDateTime.now());
+    }
+
+
+     public boolean isAfternoonAppointment(LocalDateTime appointmentDate) {
+        int hour = appointmentDate.getHour();
+        return hour >=12 && hour < 18;
+    }
+
+    public String getDescription(LocalDateTime appointmentDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy, 'at' h:mm a", Locale.US);
+       String message = "You have an appointment on ";
+       return message + appointmentDate.format(formatter) + ".";
+    }
+
+    public LocalDate getAnniversaryDate() {
+        int currentYear = LocalDate.now().getYear();
+        return LocalDate.of(currentYear,9,15);
+    }
+}
